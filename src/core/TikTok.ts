@@ -534,9 +534,9 @@ export class TikTokScraper extends EventEmitter {
                             break;
                     }
                 },
-                (message) => {
-                    if(message && process.env.DEBUGGING) {
-                        console.log(message)
+                message => {
+                    if (message && process.env.DEBUGGING) {
+                        console.log(message);
                     }
                     resolve(null);
                 },
@@ -550,11 +550,10 @@ export class TikTokScraper extends EventEmitter {
      */
     private async submitScrapingRequest(query: RequestQuery, updatedApiResponse = false): Promise<any> {
         try {
-            
             const result = await this.scrapeData<ItemListData>(query);
             if (result.statusCode !== 0) {
-                if(result.statusCode === 10000) {
-                    throw new Error(`Blocked by no a robot verification`)
+                if (result.statusCode === 10000) {
+                    throw new Error(`Blocked by no a robot verification`);
                 }
                 throw new Error(`Can't scrape more posts`);
             }
