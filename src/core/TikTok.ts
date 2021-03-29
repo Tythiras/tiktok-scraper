@@ -552,8 +552,10 @@ export class TikTokScraper extends EventEmitter {
         try {
             
             const result = await this.scrapeData<ItemListData>(query);
-            console.log(result)
             if (result.statusCode !== 0) {
+                if(result.statusCode === 10000) {
+                    throw new Error(`Blocked by no a robot verification`)
+                }
                 throw new Error(`Can't scrape more posts`);
             }
             const { hasMore, maxCursor, cursor } = result;
@@ -889,10 +891,8 @@ export class TikTokScraper extends EventEmitter {
         try {
             const response = await this.request<TikTokMetadata>(query);
             if (response.statusCode !== 0) {
-                console.log(response);
                 throw new Error(`Can not find the hashtag: ${this.input}`);
             }
-            console.log(response)
             this.idStore = response.challengeInfo.challenge.id;
             return {
                 challengeID: this.idStore,
