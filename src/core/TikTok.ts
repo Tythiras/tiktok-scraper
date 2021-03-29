@@ -547,7 +547,9 @@ export class TikTokScraper extends EventEmitter {
      */
     private async submitScrapingRequest(query: RequestQuery, updatedApiResponse = false): Promise<any> {
         try {
+            
             const result = await this.scrapeData<ItemListData>(query);
+            console.log(result)
             if (result.statusCode !== 0) {
                 throw new Error(`Can't scrape more posts`);
             }
@@ -886,6 +888,7 @@ export class TikTokScraper extends EventEmitter {
             if (response.statusCode !== 0) {
                 throw new Error(`Can not find the hashtag: ${this.input}`);
             }
+            console.log(response)
             this.idStore = response.challengeInfo.challenge.id;
             return {
                 challengeID: this.idStore,
