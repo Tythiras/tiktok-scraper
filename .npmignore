@@ -1,6 +1,5 @@
 node_modules/
 coverage/
-src/
 reverse_eng/
 examples/
 .github/
