@@ -1017,7 +1017,7 @@ export class TikTokScraper extends EventEmitter {
                 if (response.statusCode === 10000) {
                     throw new Error(`Blocked by no a robot verification`);
                 }
-                throw new Error(`Can't find hashtag: ${this.input}`);
+                throw new Error(`Can't find hashtag - Wrong statuscode: ${this.input}`);
             }
             return response.challengeInfo;
         } catch (error) {
