@@ -534,7 +534,8 @@ export class TikTokScraper extends EventEmitter {
                             break;
                     }
                 },
-                () => {
+                (test) => {
+                    console.log(test)
                     resolve(null);
                 },
             );
