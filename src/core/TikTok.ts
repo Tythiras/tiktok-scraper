@@ -534,8 +534,10 @@ export class TikTokScraper extends EventEmitter {
                             break;
                     }
                 },
-                (test) => {
-                    console.log(test)
+                (message) => {
+                    if(message && process.env.DEBUGGING) {
+                        console.log(message)
+                    }
                     resolve(null);
                 },
             );
@@ -887,6 +889,7 @@ export class TikTokScraper extends EventEmitter {
         try {
             const response = await this.request<TikTokMetadata>(query);
             if (response.statusCode !== 0) {
+                console.log(response);
                 throw new Error(`Can not find the hashtag: ${this.input}`);
             }
             console.log(response)
