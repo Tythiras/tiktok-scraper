@@ -890,6 +890,9 @@ export class TikTokScraper extends EventEmitter {
         try {
             const response = await this.request<TikTokMetadata>(query);
             if (response.statusCode !== 0) {
+                if (response.statusCode === 10000) {
+                    throw new Error(`Blocked by no a robot verification`);
+                }
                 throw new Error(`Can not find the hashtag: ${this.input}`);
             }
             this.idStore = response.challengeInfo.challenge.id;
